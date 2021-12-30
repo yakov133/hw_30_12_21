@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        //targil 1
+        function sumIndexes(num, sum) {
+            if (!num) {
+                return sum;
+            }
+            sum += num % 10;
+            num = parseInt(num / 10);
+            return sumIndexes(num, sum);
+        }
+        // console.log(sumIndexes(52314,0));
+
+        // // targil 2
+        let arr = [1, 20, -1, 22, 13, 5, 6, 0];
+        function smallest(arr, sl) {
+            if (!arr.length) {
+                return sl
+            }
+            let temp = arr.pop();
+            sl = temp < sl ? temp : sl;
+            return smallest(arr, sl);
+        }
+        // console.log(smallest(arr,arr[0]));  
+
+        // targil 3 
+        let userInput = [];
+        function getUserInput() {
+            if (userInput.length === 3) {
+                return userInput;
+            }
+            let input = prompt("insert a number");
+            if (input && parseInt(input)) {
+                userInput.push(parseInt(input))
+            }
+            return getUserInput();
+        }
+        // console.log(getUserInput());
+
+        //targil 4
+        const _mergeArrays = (a, b) => {
+            const c = []
+
+            while (a.length && b.length) {
+                c.push(a[0] > b[0] ? b.shift() : a.shift())
+            }
+
+            //if we still have values, let's add them at the end of `c`
+            while (a.length) {
+                c.push(a.shift())
+            }
+            while (b.length) {
+                c.push(b.shift())
+            }
+
+            return c
+        }
+
+        const mergeSort = (a) => {
+            if (a.length < 2) return a
+            const middle = Math.floor(a.length / 2)
+            const a_l = a.slice(0, middle)
+            const a_r = a.slice(middle, a.length)
+            const sorted_l = mergeSort(a_l)
+            const sorted_r = mergeSort(a_r)
+            return _mergeArrays(sorted_l, sorted_r)
+        }
+        console.log(arr);
+        arr = mergeSort(arr);
+        console.log(arr);
+    </script>
+</body>
+
+</html>
